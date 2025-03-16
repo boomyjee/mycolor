@@ -1,0 +1,551 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+.controls {
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+}
+
+.canvas-container {
+    position: relative;
+    flex: 1;
+    background-color: #1a1a1a;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#glCanvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.control-group {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 8px;
+}
+
+.control-group h3 {
+    margin-bottom: 15px;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.control-group h3 .checkbox-label {
+    margin: 0;
+    font-size: 14px;
+}
+
+.control-group h3 .checkbox-label input[type="checkbox"] {
+    margin: 0 8px 0 0;
+}
+
+.control-group h3::after {
+    content: '';
+    font-size: 12px;
+}
+
+.control-group.collapsed h3 {
+    margin-bottom: 0;
+}
+
+.control-group.collapsed h3::after {
+    transform: rotate(-90deg);
+}
+
+.collapsible-content {
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+    max-height: 1000px;
+}
+
+.control-group.collapsed .collapsible-content {
+    max-height: 0;
+}
+
+.control {
+    margin-bottom: 15px;
+}
+
+.control:last-child {
+    margin-bottom: 0;
+}
+
+.control label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.control input[type="range"] {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.control .value {
+    color: #888;
+    font-size: 12px;
+}
+
+.control-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.control-group button:hover {
+    background-color: #45a049;
+}
+
+#imageInput {
+    display: none;
+}
+
+.picker-2d {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: #000;
+    border-radius: 4px;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.picker-2d.circular {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+}
+
+.picker-2d.circular::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.picker-2d::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,1), rgba(255,255,255,0));
+    border-radius: 4px;
+}
+
+.picker-2d.circular::before {
+    border-radius: 50%;
+}
+
+#colorBalancePicker::before {
+    background: conic-gradient(#e100b6, #efd000, #00bf14, #5200ff, #e100b6);            
+    opacity: 0.3;
+}
+
+#colorVolumePicker::before {
+    background: conic-gradient(from 90deg at 50% 50%, #e100b6 0, #600085 13%, #210e24 25%, #57597f 38%, #b4a3bb 50%, #ddf4ff 63%, #fff 75%, #ff756b 88%, #e100b6 100%);            
+    opacity: 0.3;
+}
+
+#shadowsPicker::before {
+    background: conic-gradient(#d90f0f, #dbc00a, #0db41e, #11bec1, #5010d7, #cf11ab, #d90f0f);
+    opacity: 0.3;
+}
+
+#highlightsPicker::before {
+    background: conic-gradient(#f84e4e, #e0d462, #41b84d, #74bec4, #4b5ccc, #b03c96, #f84e4e);        
+    opacity: 0.3;
+}
+
+.picker-2d .cursor {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.picker-values {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #888;
+}
+
+.control-groups-row {
+    display: flex;
+    gap: 0px;
+    margin-bottom: 20px;
+    background: #333;
+    border-radius: 8px;
+}
+
+.control-groups-row .control-group {
+    flex: 1;
+    margin-bottom: 0;
+}
+
+.spline-editor {
+    width: 100%;
+    height: 200px;
+    background-color: #222;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.spline-editor canvas {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.spline-editor .point {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    cursor: move;
+    pointer-events: all;
+} 
+
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.tab.active {
+    background: #666;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.color-slider.red {
+    accent-color: #900;
+}
+
+.color-slider.green {
+    accent-color: #090;
+}
+
+.color-slider.blue {
+    accent-color: #009;
+}
+
+.control-group[data-linked] h3::after {
+    content: "🔓";
+}
+
+.control-group[data-linked="true"] h3::after {
+    content: "🔒";
+}
+
+.color-space-selectors {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #333;
+    border-radius: 8px;
+}
+
+.color-space-selector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.color-space-selector label {
+    font-size: 0.9rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+.color-space-selector select {
+    padding: 0.5rem;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background: #2a2a2a;
+    color: #fff;
+    font-size: 0.9rem;
+    width: 100%;
+    cursor: pointer;
+}
+
+.color-space-selector select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.color-space-selector select:hover {
+    background: #363636;
+    border-color: #555;
+}
+
+.color-space-selector select option {
+    background: #2a2a2a;
+    color: #fff;
+    padding: 0.5rem;
+}
+
+.color-space-selector select option:hover {
+    background: #363636;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.canvas-container:hover .video-controls {
+    opacity: 1;
+}
+
+.play-pause-btn {
+    background: #000;
+    border: none;
+    color: #333;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.play-pause-btn:hover {
+    background: #3a3a3a;
+}
+
+.play-pause-btn::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23333' d='M8 5v14l11-7z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+}
+
+.play-pause-btn.playing::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23333' d='M6 19h4V5H6v14zm8-14v14h4V5h-4z'/%3E%3C/svg%3E");
+}
+
+.video-progress {
+    flex: 1;
+    height: 4px;
+    background: #2a2a2a;
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.video-progress-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background: #4a4a4a;
+    border-radius: 2px;
+    pointer-events: none;
+}
+
+.scenes-tabs {
+    background: #1e1e1e;
+    padding: 10px;
+    flex-shrink: 0;
+}
+
+.scenes-tabs-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.scenes-list {
+    display: flex;
+    gap: 5px;
+}
+
+.add-scene-btn {
+    background: #333;
+    border: none;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-scene-btn:hover {
+    background: #444;
+}
+
+.scene-tab {
+    padding: 8px 15px;
+    background: #333;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    position: relative;
+}
+
+.scene-tab:hover {
+    background: #555;
+}
+
+.scene-tab.active {
+    background: #474;
+}
+
+.scene-tab .close {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.scene-tab .close:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border: 2px solid #666;
+    border-radius: 3px;
+    background: #333;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.checkbox-label input[type="checkbox"]:checked {
+    background: #0066cc;
+    border-color: #0066cc;
+}
+
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-label input[type="checkbox"]:hover {
+    border-color: #999;
+}
+
+.checkbox-label input[type="checkbox"]:checked:hover {
+    background: #0077ee;
+    border-color: #0077ee;
+}
+
+.checkbox-label span {
+    user-select: none;
+}

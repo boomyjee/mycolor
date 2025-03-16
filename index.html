@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLSL Color Editor</title>
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+    <div class="scenes-tabs">
+        <div class="scenes-tabs-header">
+            <button class="add-scene-btn">+</button>
+            <div class="scenes-list">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="controls">
+            <div class="tabs">
+                <button class="tab" data-tab="imageTab">Изображение</button>
+                <button class="tab active" data-tab="spectrumTab">Спектр</button>
+                <button class="tab" data-tab="densityTab">Плотность</button>
+                <button class="tab" data-tab="luminocityTab">Свечение</button>                                
+            </div>
+
+            <div class="tab-content" id="imageTab">
+                <div class="color-space-selectors">
+                    <div class="color-space-selector">
+                        <label for="inputSpace">Входное цветовое пространство</label>
+                        <select id="inputSpace">
+                            <option value="sRGB" selected>sRGB</option>
+                            <option value="FilmNegative">Film Negative</option>
+                            <option value="Rec709">Rec.709</option>
+                            <option value="Rec2020">Rec.2020</option>
+                            <option value="AdobeRGB">Adobe RGB</option>
+                            <option value="P3D60_CSC">P3 D60 CSC</option>
+                            <option value="P3D65_CSC">P3 D65 CSC</option>
+                            <option value="DisplayP3_IDT">Display P3 IDT</option>
+                            <option value="Cineon_IDT">Cineon IDT</option>
+                            <option value="ProPhotoRGB">ProPhoto RGB</option>
+                            <option value="VisionLogFlat">Vision Log Flat</option>
+                            <option value="VisionLog">Vision Log</option>
+                            <option value="ArriLogC">ARRI Log C</option>
+                            <option value="ArriLogC_NO_VGAMMA">ARRI Log C (No V-Gamma)</option>
+                            <option value="ArriAlexa35">ARRI Alexa 35</option>
+                            <option value="ArriAlexa35_NO_VGAMMA">ARRI Alexa 35 (No V-Gamma)</option>
+                            <option value="BMD_Cinema_Camera_Film">BMD Cinema Camera Film</option>
+                            <option value="BMD_4_6k_Film">BMD 4.6K Film</option>
+                            <option value="BMD_4k_Film">BMD 4K Film</option>
+                            <option value="BMD_Pocket_4k_Film">BMD Pocket 4K Film</option>
+                            <option value="BMD_Pocket_6k_Film">BMD Pocket 6K Film</option>
+                            <option value="BMD_Broadcast_Film">BMD Broadcast Film</option>
+                            <option value="BlackMagicDesignWideGamutGen5">BMD Wide Gamut Gen5</option>
+                            <option value="BolexLogWideGamutRGB">Bolex Log Wide Gamut RGB</option>
+                            <option value="CanonLogBT2020_Daylight">Canon Log BT.2020 (Daylight)</option>
+                            <option value="CanonLogBT2020_Tungsten">Canon Log BT.2020 (Tungsten)</option>
+                            <option value="CanonLogCinemaGamut_Daylight">Canon Log Cinema Gamut (Daylight)</option>
+                            <option value="CanonLogCinemaGamut_Tungsten">Canon Log Cinema Gamut (Tungsten)</option>
+                            <option value="CanonLog2BT2020_Daylight">Canon Log 2 BT.2020 (Daylight)</option>
+                            <option value="CanonLog2BT2020_Tungsten">Canon Log 2 BT.2020 (Tungsten)</option>
+                            <option value="CanonLog2CinemaGamut_Daylight">Canon Log 2 Cinema Gamut (Daylight)</option>
+                            <option value="CanonLog2CinemaGamut_Tungsten">Canon Log 2 Cinema Gamut (Tungsten)</option>
+                            <option value="CanonLog3BT2020_Daylight">Canon Log 3 BT.2020 (Daylight)</option>
+                            <option value="CanonLog3BT2020_Tungsten">Canon Log 3 BT.2020 (Tungsten)</option>
+                            <option value="CanonLog3CinemaGamut_Daylight">Canon Log 3 Cinema Gamut (Daylight)</option>
+                            <option value="CanonLog3CinemaGamut_Tungsten">Canon Log 3 Cinema Gamut (Tungsten)</option>
+                            <option value="DJI_DLogDGamut">DJI D-Log D-Gamut</option>
+                            <option value="DJI_DLogMDGamut">DJI D-Log M D-Gamut</option>
+                            <option value="Fuji_FLogFGamut">Fuji F-Log F-Gamut</option>
+                            <option value="FujiFLog2FGamut">Fuji F-Log2 F-Gamut</option>
+                            <option value="GoPro_ProTuneFlat">GoPro ProTune Flat</option>
+                            <option value="Kinefinity_KineLog3">Kinefinity KineLog3</option>
+                            <option value="Nikon_NLogBT2020">Nikon N-Log BT.2020</option>
+                            <option value="OM_Log_BT2020">OM Log BT.2020</option>
+                            <option value="OM_Log_P3D65">OM Log P3 D65</option>
+                            <option value="Sony_SLogSGamut">Sony S-Log S-Gamut</option>
+                            <option value="Sony_SLog2SGamut_Daylight">Sony S-Log2 S-Gamut (Daylight)</option>
+                            <option value="Sony_SLog2SGamut_Tungsten">Sony S-Log2 S-Gamut (Tungsten)</option>
+                            <option value="Sony_SLog3SGamut3">Sony S-Log3 S-Gamut3</option>
+                            <option value="Sony_SLog3SGamut3_Cine">Sony S-Log3 S-Gamut3.Cine</option>
+                            <option value="Sony_Venice_SLog3SGamut3">Sony Venice S-Log3 S-Gamut3</option>
+                            <option value="Sony_Venice_SLog3SGamut3_Cine">Sony Venice S-Log3 S-Gamut3.Cine</option>
+                            <option value="Panasonic_VLogVGamut">Panasonic V-Log V-Gamut</option>
+                            <option value="REDLogFilmDragonColor">RED Log Film DragonColor</option>
+                            <option value="REDLogFilmDragonColor2">RED Log Film DragonColor2</option>
+                            <option value="REDLogFilmRedColor">RED Log Film REDColor</option>
+                            <option value="REDLogFilmRedColor2">RED Log Film REDColor2</option>
+                            <option value="RedLogFilmRedColor3">RED Log Film REDColor3</option>
+                            <option value="RedLogFilmRedColor4">RED Log Film REDColor4</option>
+                            <option value="RedLog3G10WideGamutRGB">RED Log3G10 Wide Gamut RGB</option>
+                            <option value="RedLog3G10WideGamutRGB_NO_VGAMMA">RED Log3G10 Wide Gamut RGB (No V-Gamma)</option>
+                            <option value="ZCam_ZLog2">Z CAM Z-Log2</option>
+                            <option value="LeicaLLog">Leica L-Log</option>
+                            <option value="AppleHLG">Apple HLG</option>
+                            <option value="AppleLog">Apple Log</option>
+                            <option value="FILM_ADX10">FILM ADX10</option>
+                            <option value="FILM_ADX16">FILM ADX16</option>
+                            <option value="ACES_2065_1">ACES 2065-1</option>
+                            <option value="ACES_CC">ACEScc</option>
+                            <option value="ACES_CCT">ACEScct</option>
+                            <option value="ACES_CCT_VGAMMA">ACEScct V-Gamma</option>
+                            <option value="ACES_CG">ACEScg</option>
+                            <option value="DaVinci_WideGamut_IDT">DaVinci Wide Gamut IDT</option>
+                            <option value="DaVinci_WideGamut_VGAMMA_IDT">DaVinci Wide Gamut V-Gamma IDT</option>
+                        </select>
+                    </div>
+                    <div class="color-space-selector">
+                        <label for="outputSpace">Выходное цветовое пространство</label>
+                        <select id="outputSpace">
+                            <option value="sRGB" selected>sRGB</option>
+                            <option value="Rec709">Rec.709</option>
+                            <option value="Rec2020">Rec.2020</option>
+                            <option value="Rec2020_ST2084_HDR">Rec.2020 ST.2084 HDR</option>
+                            <option value="AdobeRGB">Adobe RGB</option>
+                            <option value="ProPhotoRGB">ProPhoto RGB</option>
+                            <option value="P3_DCI_D60">P3 DCI D60</option>
+                            <option value="P3_DCI_D65">P3 DCI D65</option>
+                            <option value="P3D60">P3 D60</option>
+                            <option value="P3D65">P3 D65</option>
+                            <option value="DisplayP3_ODT">Display P3 ODT</option>
+                            <option value="ACES_2065_1">ACES 2065-1</option>
+                            <option value="ACES_CC">ACEScc</option>
+                            <option value="ACES_CCT">ACEScct</option>
+                            <option value="ACES_CG">ACEScg</option>
+                            <option value="P3D60_CSC">P3 D60 CSC</option>
+                            <option value="P3D65_CSC">P3 D65 CSC</option>
+                            <option value="DaVinci_WideGamut_ODT">DaVinci Wide Gamut ODT</option>
+                            <option value="RED_Log3G10_WideGamutRGB">RED Log3G10 Wide Gamut RGB</option>
+                            <option value="ArriLogC3">ARRI LogC3</option>
+                            <option value="ArriLogC4">ARRI LogC4</option>
+                            <option value="ArriRec709">ARRI Rec.709</option>
+                            <option value="ArriRec2020">ARRI Rec.2020</option>
+                            <option value="Kodak2383_ACEScct">Kodak 2383 ACEScct</option>
+                            <option value="Kodak2383_Rec709">Kodak 2383 Rec.709</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Загрузка изображения</h3>
+                    <input type="file" id="imageInput" accept="image/*">
+                    <button id="uploadBtn">Загрузить изображение</button>
+                </div>
+
+                <div class="control-group">
+                    <h3>Основные настройки</h3>
+                    <div class="collapsible-content">
+                        <div class="control">
+                            <label for="exposure">Экспозиция</label>
+                            <input type="range" id="exposure" min="-2" max="2" step="0.01" value="1">
+                            <span class="value">1.0</span>
+                        </div>
+                        <div class="control">
+                            <label for="contrast">Контраст</label>
+                            <input type="range" id="contrast" min="-1" max="5" step="0.01" value="1">
+                            <span class="value">1.0</span>
+                        </div>
+                        <div class="control">
+                            <label for="temperature">Температура</label>
+                            <input type="range" id="temperature" min="-1" max="1" step="0.01" value="0">
+                            <span class="value">0.0</span>
+                        </div>
+                        <div class="control">
+                            <label for="saturation">Насыщенность</label>
+                            <input type="range" id="saturation" min="-1" max="1" step="0.01" value="1">
+                            <span class="value">1.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Экспорт</h3>
+                    <button id="exportLutBtn">Экспортировать 3D LUT</button>
+                </div>
+            </div>
+
+            <div class="tab-content active" id="spectrumTab">
+                <div class="control-group">
+                    <h3>Спектральное смешивание</h3>
+                    <div class="control">
+                        <input type="range" id="spectralMix" min="0" max="1" step="0.01" value="1">
+                        <span style="display: none;">1</span>
+                    </div>
+                </div>
+
+                <div class="control-groups-row">
+                    <div class="control-group">
+                        <h3>Баланс цвета</h3>
+                        <div id="colorBalancePicker" class="picker-2d">
+                            <div class="cursor"></div>
+                        </div>
+                        <div class="picker-values">
+                            <span>X: <span id="colorBalancePickerXValue">0.5</span></span>
+                            <span style="margin-left: 10px">Y: <span id="colorBalancePickerYValue">0.5</span></span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>Объем цвета</h3>
+                        <div id="colorVolumePicker" class="picker-2d">
+                            <div class="cursor"></div>
+                        </div>
+                        <div class="picker-values">
+                            <span>X: <span id="colorVolumePickerXValue">0.5</span></span>
+                            <span style="margin-left: 10px">Y: <span id="colorVolumePickerYValue">0.5</span></span>
+                        </div>
+                    </div>
+                </div>            
+
+                <div class="control-groups-row">
+                    <div class="control-group">
+                        <h3>Цвет теней</h3>
+                        <div id="shadowsPicker" class="picker-2d circular">
+                            <div class="cursor"></div>
+                        </div>
+                        <div class="picker-values">
+                            <span>Angle: <span id="shadowsPickerXValue">0</span></span>
+                            <span style="margin-left: 10px">Distance: <span id="shadowsPickerYValue">0</span></span>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>Цвет бликов</h3>
+                        <div id="highlightsPicker" class="picker-2d circular">
+                            <div class="cursor"></div>
+                        </div>
+                        <div class="picker-values">
+                            <span>Angle: <span id="highlightsPickerXValue">0</span></span>
+                            <span style="margin-left: 10px">Distance: <span id="highlightsPickerYValue">0</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Преломление <div id="showSeparationMask" data-label="Показать маску" style="display: inline-block; margin-left: auto;"></div></h3>                
+                    <div class="control">
+                        <label for="separation">Разделение тени и света</label>
+                        <input type="range" id="separation" min="0" max="1" step="0.01" value="0.5">
+                        <span class="value">0.5</span>
+                    </div>
+                </div>
+
+                <div class="control-groups-row">
+                    <div class="control-group">
+                        <h3>Тень</h3>
+                        <div id="refractShadowsEditor" class="spline-editor">
+                            <canvas></canvas>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <h3>Свет</h3>
+                        <div id="refractHighlightsEditor" class="spline-editor">
+                            <canvas></canvas>
+                        </div>
+                    </div>                    
+                </div>
+
+            </div>
+            <div class="tab-content" id="densityTab">
+                <div class="control-group">
+                    <h3>Смешивание плотности</h3>
+                    <div class="control">
+                        <input type="range" id="density" min="0" max="1" step="0.01" value="1">
+                        <span style="display: none;" class="value">1.0</span>
+                    </div>
+                </div>            
+
+                <div class="control-group">
+                    <h3>Hue Vs Sat</h3>
+                    <div id="hvsSplineEditor" class="spline-editor">
+                        <canvas></canvas>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Sat Vs Sat</h3>
+                    <div id="svsSplineEditor" class="spline-editor">
+                        <canvas></canvas>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Lum vs Sat</h3>
+                    <div id="lvsSplineEditor" class="spline-editor">
+                        <canvas></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content" id="luminocityTab">
+                <div class="control-group">
+                    <h3>Смешивание свечения</h3>
+                    <div class="control">
+                        <input type="range" id="luma" min="0" max="1" step="0.01" value="1">
+                        <span class="value" style="display: none;">1.0</span>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Lum vs Lum</h3>
+                    <div id="lvlSplineEditor" class="spline-editor">
+                        <canvas></canvas>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <h3>Hue vs Lum</h3>
+                    <div id="hvlSplineEditor" class="spline-editor">
+                        <canvas></canvas>
+                    </div>
+                </div>
+
+                <div class="control-groups-row">
+                    <div class="control-group" data-linked="true">
+                        <h3>Точка черного</h3>
+                        <div class="control">
+                            <input type="range" id="blackPointR" min="0" max="1" step="0.01" value="0.5" class="color-slider red">
+                            <span class="value" style="display: none;">0.5</span>
+                        </div>
+                        <div class="control">
+                            <input type="range" id="blackPointG" min="0" max="1" step="0.01" value="0.5" class="color-slider green">
+                            <span class="value" style="display: none;">0.5</span>
+                        </div>
+                        <div class="control">
+                            <input type="range" id="blackPointB" min="0" max="1" step="0.01" value="0.5" class="color-slider blue">
+                            <span class="value" style="display: none;">0.5</span>
+                        </div>
+                    </div>
+
+                    <div class="control-group" data-linked="true">
+                        <h3>Точка белого</h3>
+                        <div class="control">
+                            <input type="range" id="whitePointR" min="0" max="1" step="0.01" value="0.5" class="color-slider red">
+                            <span class="value" style="display: none;">0.5</span>
+                        </div>
+                        <div class="control">
+                            <input type="range" id="whitePointG" min="0" max="1" step="0.01" value="0.5" class="color-slider green">
+                            <span class="value" style="display: none;">0.5</span>
+                        </div>
+                        <div class="control">
+                            <input type="range" id="whitePointB" min="0" max="1" step="0.01" value="0.5" class="color-slider blue">
+                            <span class="value" style="display: none;">0.5</span>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+
+        <div class="canvas-container">
+            <canvas id="glCanvas"></canvas>
+            <div class="video-controls">
+                <button class="play-pause-btn"></button>
+                <div class="video-progress">
+                    <div class="video-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="src/main.js"></script>
+    <script>
+        // Глобальный список колбеков для перерисовки
+        window.redrawCallbacks = [];
+
+        // Функция для вызова всех колбеков перерисовки
+        window.redrawAll = () => {
+            window.redrawCallbacks.forEach(callback => callback());
+        };
+
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const tabContent = document.getElementById(tab.dataset.tab);
+                tabContent.classList.add('active');
+
+                // Вызываем все колбеки перерисовки при переключении таба
+                window.redrawAll();
+            });
+        });
+
+        // Обработка синхронизации слайдеров точек черного и белого
+        const blackPointGroup = document.querySelector('.control-group:has(#blackPointR)');
+        const whitePointGroup = document.querySelector('.control-group:has(#whitePointR)');
+
+        function syncGroupSliders(sourceId, delta) {
+            const groupPrefix = sourceId.slice(0, -1); // Убираем последний символ (R/G/B)
+            const group = groupPrefix === 'blackPoint' ? blackPointGroup : whitePointGroup;
+            
+            if (group.dataset.linked !== 'true') return;
+
+            ['R', 'G', 'B'].forEach(color => {
+                const targetId = `${groupPrefix}${color}`;
+                if (targetId !== sourceId) { // Пропускаем исходный слайдер
+                    const slider = document.getElementById(targetId);
+                    slider.value = parseFloat(slider.value) + delta;
+                    
+                    // Обновляем отображение значения
+                    const valueDisplay = slider.nextElementSibling;
+                    if (valueDisplay) {
+                        valueDisplay.textContent = slider.value;
+                    }
+                }
+            });
+        }
+
+        // Обработчики для слайдеров
+        ['blackPointR', 'blackPointG', 'blackPointB', 'whitePointR', 'whitePointG', 'whitePointB'].forEach(id => {
+            const slider = document.getElementById(id);
+            slider.dataset.lastValue = slider.value;
+            slider.addEventListener('input', (e) => {
+                var delta = parseFloat(e.target.value) - parseFloat(slider.dataset.lastValue);
+                slider.dataset.lastValue = slider.value;
+                syncGroupSliders(id, delta);
+            });
+        });
+
+        // Обработчик переключения связи
+        [blackPointGroup, whitePointGroup].forEach(group => {
+            group.querySelector('h3').addEventListener('click', () => {
+                const newState = group.dataset.linked === 'true' ? 'false' : 'true';
+                group.dataset.linked = newState;
+            });
+        });
+    </script>
+</body>
+</html> 
