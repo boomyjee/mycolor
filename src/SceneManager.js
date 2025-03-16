@@ -26,9 +26,9 @@ export class SceneManager {
 
     async restoreScenesState(){
         const savedScenesJSON = localStorage.getItem('editorScenes');
-        const savedScenes = JSON.parse(savedScenesJSON);
+        const savedScenes = JSON.parse(savedScenesJSON) ?? {allScenes: []};
 
-        for (var scene of savedScenes.allScenes) {
+        for (var scene of savedScenes?.allScenes ?? []) {
             if (scene.state.fileHandle) {
                 scene.state.fileHandle = await this.fileStorage.getFileHandle(scene.uid);
             }
