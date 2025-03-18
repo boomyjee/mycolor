@@ -43,16 +43,20 @@ export class SplineEditor {
         this.setupCanvas = this.setupCanvas.bind(this);
         this.render = this.render.bind(this);
 
-        // Создаем колбек для перерисовки
-        const redraw = () => {
-            if (this.container.offsetParent !== null) { // Проверяем видимость элемента
-                this.setupCanvas();
-                this.render();
-            }
-        };
+        // Создаем IntersectionObserver для отслеживания видимости
+        this.observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.setupCanvas();
+                    this.render();
+                }
+            });
+        }, {
+            threshold: 0.1 // Триггер когда хотя бы 10% элемента видимо
+        });
 
-        // Добавляем колбек в глобальный список
-        window.redrawCallbacks.push(redraw);
+        // Начинаем наблюдение за контейнером
+        this.observer.observe(this.container);
         
         this.setupCanvas();
         this.setupListeners();
@@ -460,5 +464,15 @@ export class SplineEditor {
             }
             return result;
         }
+    }
+
+    // Добавляем метод для очистки при уничтожении компонента
+    destroy() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+        // Удаляем другие слушатели событий если они есть
+        document.removeEventListener('mousemove', this.handleMove);
+        document.removeEventListener('mouseup', this.handleUp);
     }
 } 

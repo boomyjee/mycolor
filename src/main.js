@@ -490,12 +490,49 @@ function initWebGL() {
     whitePointGSlider = new Slider('whitePointG');
     whitePointBSlider = new Slider('whitePointB');
 
+    const sliderGroups = {
+        blackPoint: [blackPointRSlider, blackPointGSlider, blackPointBSlider],
+        whitePoint: [whitePointRSlider, whitePointGSlider, whitePointBSlider]
+    };
+
+    for (const [groupName, sliders] of Object.entries(sliderGroups)) {
+        const groupElement = document.querySelector('.control-group:has(#' + groupName + 'R)');
+        groupElement.querySelector('h3').addEventListener('click', () => {
+            groupElement.dataset.linked = groupElement.dataset.linked === 'true' ? 'false' : 'true';
+        });
+
+        sliders.forEach(slider => {
+            slider.prevValue = slider.getValue();
+            slider.onChange = (value,type) => {
+                if (type=='input') {
+                    const delta = value - slider.prevValue;
+                    sliders.forEach(s => {
+                        if (s !== slider && groupElement.dataset.linked === 'true') s.setValue(s.getValue() + delta);
+                    });
+                }
+                slider.prevValue = value;
+            };
+        });
+    };
+
     const inputSpaceSelect = document.getElementById('inputSpace');
     const outputSpaceSelect = document.getElementById('outputSpace');
 
     // Добавляем обработчики событий
     inputSpaceSelect.addEventListener('change', updateColorSpaces);
     outputSpaceSelect.addEventListener('change', updateColorSpaces);
+
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            tab.classList.add('active');
+            const tabContent = document.getElementById(tab.dataset.tab);
+            tabContent.classList.add('active');
+        });
+    });
+
 
     // Добавляем обработчик для кнопки экспорта
     document.getElementById('exportLutBtn').addEventListener('click', () => {

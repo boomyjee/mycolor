@@ -10,7 +10,7 @@ export class Slider {
         this.element.addEventListener('input', () => {
             this.updateValueDisplay();
             if (this.onChange) {
-                this.onChange(this.getValue());
+                this.onChange(this.getValue(),'input');
             }
         });
 
