@@ -1,4 +1,5 @@
 import { FileStorage } from './FileStorage.js';
+import { ContextMenu } from './ContextMenu.js';
 
 export class SceneManager {
     constructor(getInterfaceState,setInterfaceState) {
@@ -14,6 +15,8 @@ export class SceneManager {
 
         this.fileStorage = new FileStorage();
         this.fileStorage.init();
+        
+        this.contextMenu = new ContextMenu();
         
         this.setupListeners();
         this.restoreScenesState();
@@ -59,15 +62,16 @@ export class SceneManager {
         // Делегирование событий для табов сцен
         this.scenesList.addEventListener('click', (e) => {
             const sceneTab = e.target.closest('.scene-tab');
-            const closeBtn = e.target.closest('.close');
+            const menuBtn = e.target.closest('.menu-btn');
             
-            if (closeBtn) {
+            if (menuBtn) {
                 const sceneId = sceneTab.dataset.scene;
-                this.deleteScene(sceneId);
+                const scene = this.scenes.get(parseInt(sceneId));
+                this.handleSceneMenu(e, scene);
                 e.stopPropagation();
             } else if (sceneTab) {
                 const sceneId = sceneTab.dataset.scene;
-                if (this.currentScene.id != sceneId) {
+                if (this.currentScene?.id != sceneId) {
                     this.switchScene(sceneId);
                 }
             }
@@ -83,7 +87,7 @@ export class SceneManager {
         tab.dataset.scene = sceneId;
         tab.innerHTML = `
             Сцена ${sceneId}
-            <span class="close">×</span>
+            <button class="menu-btn"></button>
         `;
         
         this.scenesList.appendChild(tab);
@@ -92,6 +96,7 @@ export class SceneManager {
         const scene = {
             id: sceneId,
             uid: crypto.randomUUID(),
+            name: `Сцена ${sceneId}`,
             state: {}, // Будет содержать состояние интерфейса
         };
         
@@ -157,11 +162,7 @@ export class SceneManager {
         return {
             sceneId: this.currentScene.id,
             state: this.currentScene.state,
-            allScenes: Array.from(this.scenes.entries()).map(([id, scene]) => ({
-                id,
-                uid: scene.uid,
-                state: scene.state
-            }))
+            allScenes: Array.from(this.scenes.entries()).map(([id, scene]) => ({...scene}))
         };
     }
 
@@ -179,8 +180,8 @@ export class SceneManager {
             tab.className = 'scene-tab';
             tab.dataset.scene = scene.id;
             tab.innerHTML = `
-                Сцена ${scene.id}
-                <span class="close">×</span>
+                ${scene.name}
+                <button class="menu-btn"></button>
             `;
             
             this.scenesList.appendChild(tab);
@@ -188,6 +189,7 @@ export class SceneManager {
             this.scenes.set(scene.id, {
                 id: scene.id,
                 uid: scene.uid,
+                name: scene.name || `Сцена ${scene.id}`,
                 state: scene.state
             });
 
@@ -203,5 +205,54 @@ export class SceneManager {
             const firstSceneId = this.scenes.keys().next().value;
             await this.switchScene(firstSceneId);
         }
+    }
+
+    handleSceneMenu(e, scene) {
+        this.contextMenu.setItems([
+            {
+                label: 'Переименовать',
+                icon: '✏️',
+                action: () => {
+                    const newName = prompt('Введите новое имя сцены:', scene.name);
+                    if (newName && newName.trim()) {
+                        scene.name = newName.trim();
+                        const tab = this.scenesList.querySelector(`[data-scene="${scene.id}"]`);
+                        if (tab) {
+                            tab.childNodes[0].textContent = scene.name;
+                        }
+                    }
+                }
+            },
+            {
+                label: 'Скопировать грейд',
+                icon: '📋',
+                action: async () => {
+                    if (scene.id === this.currentScene?.id) {
+                        scene.state = await this.getInterfaceState();
+                    }
+                    this.copiedState = { ...scene.state };
+                }
+            },
+            {
+                label: 'Вставить грейд',
+                icon: '📥',
+                action: async () => {
+                    if (this.copiedState) {
+                        scene.state = { ...this.copiedState };
+                        if (scene.id === this.currentScene?.id) {
+                            await this.setInterfaceState(scene.state);
+                        }
+                    }
+                }
+            },
+            { separator: true },
+            {
+                label: 'Удалить',
+                icon: '🗑️',
+                action: () => this.deleteScene(scene.id)
+            }
+        ]);
+        
+        this.contextMenu.show(e.clientX, e.clientY);
     }
 } 

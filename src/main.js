@@ -29,7 +29,7 @@ fetch('assets/shader.glsl')
     .then(async text => {
         fragmentShaderTemplate = text;
         initWebGL();
-        sceneManager = new SceneManager(getInterfaceState,setInterfaceState);
+        sceneManager = new SceneManager(getInterfaceState, setInterfaceState);
     });
 
 // Инициализация WebGL
