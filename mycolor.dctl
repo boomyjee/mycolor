@@ -1,0 +1,755 @@
+DEFINE_UI_PARAMS(iExposure, Exposure, DCTLUI_SLIDER_FLOAT, 1.0, 0.1, 4.0, 0.01)
+DEFINE_UI_PARAMS(iContrast, Contrast, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 2.0, 0.01)
+DEFINE_UI_PARAMS(iTemperature, Temperature, DCTLUI_SLIDER_FLOAT, 0.0, -1.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(iSaturation, Saturation, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 2.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_1,===================, DCTLUI_SLIDER_FLOAT,  1.0, 0.0, 1.0, 0.0)
+
+DEFINE_UI_PARAMS(colorVolume_x, Spectrum/Density, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(colorVolume_y, Spectrum/Brightness, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(colorBalance_x, Spectrum/YB, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(colorBalance_y, Spectrum/CG, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_2,===================, DCTLUI_SLIDER_FLOAT,  1.0, 0.0, 1.0, 0.0)
+DEFINE_UI_PARAMS(shadowsAngle, Shadows/HUE, DCTLUI_SLIDER_FLOAT, 0.0, 0.0, 360.0, 1.0)
+DEFINE_UI_PARAMS(shadowsDistance, Shadows/Mix, DCTLUI_SLIDER_FLOAT, 0.0, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(highlightsAngle, Highlights/HUE, DCTLUI_SLIDER_FLOAT, 0.0, 0.0, 360.0, 1.0)
+DEFINE_UI_PARAMS(highlightsDistance, Highlights/Mix, DCTLUI_SLIDER_FLOAT, 0.0, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_hvs,=======SHOW=CURVE, DCTLUI_SLIDER_FLOAT,  0.0, 0.0, 1.0, 0.5)
+DEFINE_UI_PARAMS(hvsSpline1, HvS point 1, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvsSpline2, HvS point 2, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvsSpline3, HvS point 3, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvsSpline4, HvS point 4, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvsSpline5, HvS point 5, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvsSpline6, HvS point 6, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_svs,=======SHOW=CURVE, DCTLUI_SLIDER_FLOAT,  0.0, 0.0, 1.0, 0.5)
+DEFINE_UI_PARAMS(svsSpline1, SvS point 1, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(svsSpline2, SvS point 2, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(svsSpline3, SvS point 3, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(svsSpline4, SvS point 4, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(svsSpline5, SvS point 5, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(svsSpline6, SvS point 6, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_lvs,=======SHOW=CURVE, DCTLUI_SLIDER_FLOAT,  0.0, 0.0, 1.0, 0.5)
+DEFINE_UI_PARAMS(lvsSpline1, LvS point 1, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvsSpline2, LvS point 2, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvsSpline3, LvS point 3, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvsSpline4, LvS point 4, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvsSpline5, LvS point 5, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvsSpline6, LvS point 6, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_lvl,=======SHOW=CURVE, DCTLUI_SLIDER_FLOAT,  0.0, 0.0, 1.0, 0.0)
+DEFINE_UI_PARAMS(lvlSpline1, LvL point 1, DCTLUI_SLIDER_FLOAT, 0.0, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvlSpline2, LvL point 2, DCTLUI_SLIDER_FLOAT, 0.2, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvlSpline3, LvL point 3, DCTLUI_SLIDER_FLOAT, 0.4, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvlSpline4, LvL point 4, DCTLUI_SLIDER_FLOAT, 0.6, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvlSpline5, LvL point 5, DCTLUI_SLIDER_FLOAT, 0.8, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lvlSpline6, LvL point 6, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_hvl,=======SHOW=CURVE, DCTLUI_SLIDER_FLOAT,  0.0, 0.0, 1.0, 0.0)
+DEFINE_UI_PARAMS(hvlSpline1, HvL point 1, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvlSpline2, HvL point 2, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvlSpline3, HvL point 3, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvlSpline4, HvL point 4, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvlSpline5, HvL point 5, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(hvlSpline6, HvL point 6, DCTLUI_SLIDER_FLOAT, 0.5, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_bp_wp,===================, DCTLUI_SLIDER_FLOAT,  1.0, 0.0, 1.0, 0.0)
+DEFINE_UI_PARAMS(blackPoint_r, Black Point/Red, DCTLUI_SLIDER_FLOAT, 0.0, -1.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(blackPoint_g, Black Point/Green, DCTLUI_SLIDER_FLOAT, 0.0, -1.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(blackPoint_b, Black Point/Blue, DCTLUI_SLIDER_FLOAT, 0.0, -1.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(whitePoint_r, White Point/Red, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 2.0, 0.01)
+DEFINE_UI_PARAMS(whitePoint_g, White Point/Green, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 2.0, 0.01)
+DEFINE_UI_PARAMS(whitePoint_b, White Point/Blue, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 2.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_mix,===================, DCTLUI_SLIDER_FLOAT,  1.0, 0.0, 1.0, 0.0)
+DEFINE_UI_PARAMS(spectralMix, Spectral Mix, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(densityMix, Density Mix, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 1.0, 0.01)
+DEFINE_UI_PARAMS(lumaMix, Brightness Mix, DCTLUI_SLIDER_FLOAT, 1.0, 0.0, 1.0, 0.01)
+
+DEFINE_UI_PARAMS(separator_map_s,========SHOW=MASK, DCTLUI_SLIDER_INT,  0, 0, 1, 0)
+DEFINE_UI_PARAMS(separation, Low/High Separation, DCTLUI_SLIDER_INT, 50, 0, 100, 1)
+
+DEFINE_UI_PARAMS(separator_map_0,===================, DCTLUI_SLIDER_INT,  1, 0, 1, 0)
+DEFINE_UI_PARAMS(mapVec0_x, Red Hue Low, DCTLUI_SLIDER_INT, 0, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec0_y, Red Sat Low, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+DEFINE_UI_PARAMS(mapVec0_z, Red Hue High, DCTLUI_SLIDER_INT, 0, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec0_w, Red Sat High, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+
+DEFINE_UI_PARAMS(separator_map_1,===================, DCTLUI_SLIDER_INT,  1, 0, 1, 0)
+DEFINE_UI_PARAMS(mapVec1_x, Yellow Hue Low, DCTLUI_SLIDER_INT, 60, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec1_y, Yellow Sat Low, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+DEFINE_UI_PARAMS(mapVec1_z, Yellow Hue High, DCTLUI_SLIDER_INT, 60, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec1_w, Yellow Sat High, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+
+DEFINE_UI_PARAMS(separator_map_2,===================, DCTLUI_SLIDER_INT,  1, 0, 1, 0)
+DEFINE_UI_PARAMS(mapVec2_x, Green Hue Low, DCTLUI_SLIDER_INT, 120, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec2_y, Green Sat Low, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+DEFINE_UI_PARAMS(mapVec2_z, Green Hue High, DCTLUI_SLIDER_INT, 120, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec2_w, Green Sat High, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+
+DEFINE_UI_PARAMS(separator_map_3,===================, DCTLUI_SLIDER_INT,  1, 0, 1, 0)
+DEFINE_UI_PARAMS(mapVec3_x, Cyan Hue Low, DCTLUI_SLIDER_INT, 180, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec3_y, Cyan Sat Low, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+DEFINE_UI_PARAMS(mapVec3_z, Cyan Hue High, DCTLUI_SLIDER_INT, 180, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec3_w, Cyan Sat High, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+
+DEFINE_UI_PARAMS(separator_map_4,===================, DCTLUI_SLIDER_INT,  1, 0, 1, 0)
+DEFINE_UI_PARAMS(mapVec4_x, Blue Hue Low, DCTLUI_SLIDER_INT, 240, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec4_y, Blue Sat Low, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+DEFINE_UI_PARAMS(mapVec4_z, Blue Hue High, DCTLUI_SLIDER_INT, 240, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec4_w, Blue Sat High, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+
+DEFINE_UI_PARAMS(separator_map_5,===================, DCTLUI_SLIDER_INT,  1, 0, 1, 0)
+DEFINE_UI_PARAMS(mapVec5_x, Magenta Hue Low, DCTLUI_SLIDER_INT, 300, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec5_y, Magenta Sat Low, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+DEFINE_UI_PARAMS(mapVec5_z, Magenta Hue High, DCTLUI_SLIDER_INT, 300, 0, 360, 1)
+DEFINE_UI_PARAMS(mapVec5_w, Magenta Sat High, DCTLUI_SLIDER_INT, 100, 0, 200, 1)
+
+// 3x3 Matrix definition
+typedef struct {
+    float3 r0;
+    float3 r1;
+    float3 r2;
+} matrix3;
+
+// Matrices
+__CONSTANT__ matrix3 rgb2yiq = {
+    {0.299f, 0.587f, 0.114f},
+    {0.596f, -0.274f, -0.322f},
+    {0.211f, -0.523f, 0.312f}
+};
+
+__CONSTANT__ matrix3 yiq2rgb = {
+    {1.0f, 0.956f, 0.621f},
+    {1.0f, -0.272f, -0.647f},
+    {1.0f, -1.105f, 1.702f}
+};
+
+// Constants
+__CONSTANT__ float3 D667 = {0.93f, 0.54f, 0.0f};
+__CONSTANT__ float3 D667inv = {0.07f, 0.46f, 1.0f};  // 1.0 - D667
+
+// Constants for shadows and highlights calculation
+__CONSTANT__ float COEFFICIENTS[48] = {
+    0.7241065241966241f, 0.38032959880647427f, 0.34893263968361626f,
+    0.7835911868134677f, 0.5300864625456815f, 0.2766857286769332f,
+    0.8271730047148866f, 0.6787247844882949f, 0.18326072978879046f,
+    0.8300257270376946f, 0.8174593916039772f, 0.13592703408556722f,
+    0.7406067120307717f, 0.8372307837782795f, 0.34289432442093193f,
+    0.6539930498811265f, 0.8369045991706899f, 0.48298164483906014f,
+    0.5564548549841858f, 0.8418846940401803f, 0.6307019025287327f,
+    0.4244593376605096f, 0.8383847426091521f, 0.7833550941371147f,
+    0.360113919906843f, 0.8208607739878486f, 0.9081093742083968f,
+    0.5220658424842441f, 0.7993179189046314f, 0.9583201462123344f,
+    0.6398980209684421f, 0.7601588749163941f, 0.9565857000218989f,
+    0.7212096931791545f, 0.7109022154458666f, 0.9461554300141622f,
+    0.7302135229590574f, 0.6171260999547182f, 0.910414970864051f,
+    0.7405137392866862f, 0.4942038730729897f, 0.8095220428319969f,
+    0.7350935645049326f, 0.36828980677764583f, 0.6505922452623222f,
+    0.7225540492264427f, 0.3421089635952578f, 0.49381191031819593f
+};
+
+__CONSTANT__ int COEF_GROUPS = 16; // 48/3
+
+// Basic vector operations
+__DEVICE__ float3 mix3(float3 a, float3 b, float t) {
+    return make_float3(
+        _mix(a.x, b.x, t),
+        _mix(a.y, b.y, t),
+        _mix(a.z, b.z, t)
+    );
+}
+
+__DEVICE__ float3 mix3_v(float3 a, float3 b, float3 t) {
+    return make_float3(
+        _mix(a.x, b.x, t.x),
+        _mix(a.y, b.y, t.y),
+        _mix(a.z, b.z, t.z)
+    );
+}
+
+__DEVICE__ float3 clamp3(float3 v, float min_val, float max_val) {
+    return make_float3(
+        _clampf(v.x, min_val, max_val),
+        _clampf(v.y, min_val, max_val),
+        _clampf(v.z, min_val, max_val)
+    );
+}
+
+__DEVICE__ float get_distance(float3 a, float3 b) {
+    float3 diff = a - b;
+    return _sqrtf(diff.x * diff.x + diff.y * diff.y + diff.z * diff.z);
+}
+
+// Helper functions
+__DEVICE__ float rgb2luma(float3 c) {
+    return c.x * 0.29889531f + c.y * 0.58662247f + c.z * 0.11448223f;
+}
+
+__DEVICE__ float max3(float a, float b, float c) {
+    return _fmaxf(a, _fmaxf(b, c));
+}
+
+__DEVICE__ float min3(float a, float b, float c) {
+    return _fminf(a, _fminf(b, c));
+}
+
+__DEVICE__ float rgb2chroma(float3 rgb) {
+    float dot1 = rgb.x * 0.59597799f + rgb.y * -0.27417610f + rgb.z * -0.32180189f;
+    float dot2 = rgb.x * 0.21147017f + rgb.y * -0.52261711f + rgb.z * 0.31114694f;
+    return _sqrtf(dot1 * dot1 + dot2 * dot2);
+}
+
+__DEVICE__ float chroma2log(float crm) {
+    return crm < 0.5f ? _powf(4.0f * crm * (1.0f - crm), 0.4f) : 1.0f;
+}
+
+__DEVICE__ float yiq2chroma(float3 yiq) {
+    return _sqrtf(yiq.y * yiq.y + yiq.z * yiq.z);
+}
+
+__DEVICE__ float4 mix_v4(float4 a, float4 b, float t) {
+    return make_float4(
+        _mix(a.x, b.x, t),
+        _mix(a.y, b.y, t),
+        _mix(a.z, b.z, t),
+        _mix(a.w, b.w, t)
+    );
+}
+
+__DEVICE__ float rgb2hue(float3 c) {
+    const float4 k = {0.0f, -1.0f / 3.0f, 2.0f / 3.0f, -1.0f};
+    float4 p = mix_v4(
+        make_float4(c.z, c.y, k.w, k.z),
+        make_float4(c.y, c.z, k.x, k.y),
+        c.z <= c.y ? 1.0f : 0.0f
+    );
+    float4 q = mix_v4(
+        make_float4(p.x, p.y, p.w, c.x),
+        make_float4(c.x, p.y, p.z, p.x),
+        p.x <= c.x ? 1.0f : 0.0f
+    );
+    return _fabs((q.w - q.y) / (6.0f * (q.x - _fminf(q.w, q.y)) + 0.0001f) + q.z);
+}
+
+__DEVICE__ float3 matmul(matrix3 m, float3 v) {
+    return make_float3(
+        dot(m.r0, v),
+        dot(m.r1, v),
+        dot(m.r2, v)
+    );
+}
+
+__DEVICE__ float4 calculateValues(float angle, float distance, float baseValue) {
+    float t = angle;
+    if (t >= 360.0f) t = 0.0f;
+    float n = distance;
+    float e = baseValue;
+    
+    e *= 1.0f - n;
+    t /= 360.0f;
+    float s = t * COEF_GROUPS;
+    int o = _floor(s);
+    int r = 3 * o;
+    int a = (o + 1) % COEF_GROUPS * 3;
+    float l = s - o;
+    float c = 1.0f - l;
+    
+    return make_float4(
+        e + n * (COEFFICIENTS[r] * c + COEFFICIENTS[a] * l),
+        e + n * (COEFFICIENTS[r + 1] * c + COEFFICIENTS[a + 1] * l),
+        e + n * (COEFFICIENTS[r + 2] * c + COEFFICIENTS[a + 2] * l),
+        t
+    );
+}
+
+__DEVICE__ float cubicInterpolate(float p0, float p1, float p2, float p3, float t) {
+    float a = -0.5f * p0 + 1.5f * p1 - 1.5f * p2 + 0.5f * p3;
+    float b = p0 - 2.5f * p1 + 2.0f * p2 - 0.5f * p3;
+    float c = -0.5f * p0 + 0.5f * p2;
+    float d = p1;
+    
+    return ((a * t + b) * t + c) * t + d;
+}
+
+__DEVICE__ float getSplineValue(float x, float p1, float p2, float p3, float p4, float p5, float p6) {
+    float points[6] = {p1, p2, p3, p4, p5, p6};
+    float t = x * 5.0f; // преобразуем x в диапазон [0,5]
+    int i = _floor(t);
+    float f = t - i;
+    
+    if (i < 1) return cubicInterpolate(points[0], points[0], points[1], points[2], f);
+    if (i > 3) return cubicInterpolate(points[3], points[4], points[5], points[5], f);
+    return cubicInterpolate(points[i-1], points[i], points[i+1], points[i+2], f);
+}
+
+__DEVICE__ float rf_sig(float x, float k) {
+    return 1.0f / (1.0f + (_expf(-(x - 0.5f) * k)));
+}
+
+__DEVICE__ float rf_hlko(float x) {
+    x *= x * x * x * x;
+    return _expf(-42.3301f * x) * (1.0f - x);
+}
+
+__DEVICE__ float3 rf_h2r(float h) {
+    const float3 p324 = {3.0f, 2.0f, 4.0f};
+    const float3 p111 = {1.0f, -1.0f, -1.0f};
+    const float3 p122 = {-1.0f, 2.0f, 2.0f};
+    float3 result;
+    result.x = _clampf(_fabs(h * 6.0f - p324.x) * p111.x + p122.x, 0.0f, 1.0f) - 1.0f;
+    result.y = _clampf(_fabs(h * 6.0f - p324.y) * p111.y + p122.y, 0.0f, 1.0f) - 1.0f;
+    result.z = _clampf(_fabs(h * 6.0f - p324.z) * p111.z + p122.z, 0.0f, 1.0f) - 1.0f;
+    return result;
+}
+
+__DEVICE__ float rf_s2m(float l, float spr) {
+    const float llmt = 0.2f;
+    const float illmt = 1.0f - llmt;
+    spr = spr * illmt + llmt;
+    return rf_sig(l, spr * spr * 60.0f);
+}
+
+#define rf_crmO 0.333f
+#define rf_crmD 16.667f
+#define rf_crml (rf_crmO + rf_crmD)
+#define rf_crmM (_powf(rf_crml, rf_crml) / (_powf(rf_crmO, rf_crmO) * _powf(rf_crmD, rf_crmD)))
+
+__DEVICE__ float rf_mLMT(float3 rgb, float lum) {
+    float crm = rgb2chroma(rgb) * 2.0f;
+    float mxc = max3(rgb.x, rgb.y, rgb.z);
+    float crm_ko = rf_crmM * _powf(crm, mxc) * _powf(1.0f - crm, rf_crmD - mxc);
+    float hl_ko = rf_hlko(lum);
+    return crm_ko * hl_ko * 1.333f;
+}
+
+__DEVICE__ float3 rf_p2c(float4 p, float separation, float lmt) {
+    float d = p.z - p.x;
+    float delta = d + ((_fabs(d) > 180.0f) ? ((d < 0.0f) ? 360.0f : -360.0f) : 0.0f);
+    float s = _mix(p.y, p.w, separation);
+    s = _mix(_fminf(s, 1.0f), s, lmt);
+    float h = _fmod((p.x + delta * separation) + 360.0f, 360.0f) / 360.0f;
+    return rf_h2r(h) * s + 1.0f;
+}
+
+__DEVICE__ float3 refrakt(float3 rgb, float4 pR, float4 pY, float4 pG, float4 pC, float4 pB, float4 pM, float lum, float spr) {
+    float sprMask = rf_s2m(max3(rgb.x, rgb.y, rgb.z), spr);
+    float lmt = rf_mLMT(rgb, lum);
+    
+    if (rgb.x > rgb.y) {
+        if (rgb.y > rgb.z) {
+            // R > G > B
+            float3 r = rf_p2c(pR, sprMask, lmt);
+            float3 y = rf_p2c(pY, sprMask, lmt);
+            return make_float3(
+                rgb.x * r.x + rgb.y * (y.x - r.x) + rgb.z * (1.0f - y.x),
+                rgb.x * r.y + rgb.y * (y.y - r.y) + rgb.z * (1.0f - y.y),
+                rgb.x * r.z + rgb.y * (y.z - r.z) + rgb.z * (1.0f - y.z)
+            );
+        } else if (rgb.x > rgb.z) {
+            // R > B > G
+            float3 r = rf_p2c(pR, sprMask, lmt);
+            float3 m = rf_p2c(pM, sprMask, lmt);
+            return make_float3(
+                rgb.x * r.x + rgb.y * (1.0f - m.x) + rgb.z * (m.x - r.x),
+                rgb.x * r.y + rgb.y * (1.0f - m.y) + rgb.z * (m.y - r.y),
+                rgb.x * r.z + rgb.y * (1.0f - m.z) + rgb.z * (m.z - r.z)
+            );
+        } else {
+            // B > R > G
+            float3 m = rf_p2c(pM, sprMask, lmt);
+            float3 b = rf_p2c(pB, sprMask, lmt);
+            return make_float3(
+                rgb.x * (m.x - b.x) + rgb.y * (1.0f - m.x) + rgb.z * b.x,
+                rgb.x * (m.y - b.y) + rgb.y * (1.0f - m.y) + rgb.z * b.y,
+                rgb.x * (m.z - b.z) + rgb.y * (1.0f - m.z) + rgb.z * b.z
+            );
+        }
+    } else {
+        if (rgb.z > rgb.y) {
+            // B > G > R
+            float3 c = rf_p2c(pC, sprMask, lmt);
+            float3 b = rf_p2c(pB, sprMask, lmt);
+            return make_float3(
+                rgb.x * (1.0f - c.x) + rgb.y * (c.x - b.x) + rgb.z * b.x,
+                rgb.x * (1.0f - c.y) + rgb.y * (c.y - b.y) + rgb.z * b.y,
+                rgb.x * (1.0f - c.z) + rgb.y * (c.z - b.z) + rgb.z * b.z
+            );
+        } else if (rgb.z > rgb.x) {
+            // G > B > R
+            float3 c = rf_p2c(pC, sprMask, lmt);
+            float3 g = rf_p2c(pG, sprMask, lmt);
+            return make_float3(
+                rgb.x * (1.0f - c.x) + rgb.y * g.x + rgb.z * (c.x - g.x),
+                rgb.x * (1.0f - c.y) + rgb.y * g.y + rgb.z * (c.y - g.y),
+                rgb.x * (1.0f - c.z) + rgb.y * g.z + rgb.z * (c.z - g.z)
+            );
+        } else {
+            // G > R > B
+            float3 y = rf_p2c(pY, sprMask, lmt);
+            float3 g = rf_p2c(pG, sprMask, lmt);
+            return make_float3(
+                rgb.x * (y.x - g.x) + rgb.y * g.x + rgb.z * (1.0f - y.x),
+                rgb.x * (y.y - g.y) + rgb.y * g.y + rgb.z * (1.0f - y.y),
+                rgb.x * (y.z - g.z) + rgb.y * g.z + rgb.z * (1.0f - y.z)
+            );
+        }
+    }
+}
+
+__DEVICE__ float sk_hlmin(float l, float r, float k) {
+    float h = _fmaxf(k - _fabs(l - r), 0.0f) / k;
+    return _fminf(l, r) - h * h * k * 0.25f;
+}
+
+__DEVICE__ float sk_slmt(float mxc) {
+    mxc *= mxc * mxc;
+    return _expf(-5.0f * mxc) * (1.0f - mxc);
+}
+
+__DEVICE__ float sk_hlko(float l, float lp2) {
+    return _expf(-6.0f * lp2) * (1.0f - lp2 * l);
+}
+
+__DEVICE__ float sk_sdko(float lp2) {
+    return _expf(-2.2f * lp2 * lp2) * (1.0f - lp2 * lp2);
+}
+
+__DEVICE__ float sk_hd2m(float a, float b, float mxc) {
+    float lmt = sk_slmt(mxc);
+    float d = _fabs(a - b);
+    d = _fminf(d, 1.0f - d) / 0.5f;
+    d = 1.0f - d * d;
+    return (d * d * (1.0f - lmt)) + lmt;
+}
+
+__DEVICE__ float3 skatter(float3 color, float4 shadows, float4 highlights, float hue, float maxRGB, float lum) {
+    const float3 ooo = {0.0f, 0.0f, 0.0f};
+    float3 base = color;
+    float lumP2 = lum * lum;
+    
+    float shd = sk_hd2m(hue, shadows.w, maxRGB);
+    float skm = lumP2 * (5.5f - lum);
+    skm *= sk_hlko(lum, lumP2);
+    skm *= shd;
+    skm *= 2.75f;
+
+    float3 ssc = make_float3(shadows.x * skm, shadows.y * skm, shadows.z * skm);
+    float ssi = _fminf(ssc.x, _fminf(ssc.y, ssc.z));
+    color = mix3(base, ssc, ssi);
+    
+    float ssm = _fminf(2.0f, 1.0f + ssi * skm * (1.0f - shd) * 3.333f);
+    color = clamp3(mix3(make_float3(lum, lum, lum), color, ssm), 0.0f, 1.0f);
+    
+    float hkm = sk_sdko(lumP2);
+    float3 hlv = make_float3(highlights.x, highlights.y, highlights.z);
+    float hsi = _fminf(1.0f, get_distance(hlv, ooo));
+    
+    float3 hlc = make_float3(
+        (1.0f - hkm) * (highlights.x * (2.0f - hsi)) + hkm,
+        (1.0f - hkm) * (highlights.y * (2.0f - hsi)) + hkm,
+        (1.0f - hkm) * (highlights.z * (2.0f - hsi)) + hkm
+    );
+    
+    float3 hlc4 = make_float3(
+        hlc.x * hlc.x * hlc.x * hlc.x,
+        hlc.y * hlc.y * hlc.y * hlc.y,
+        hlc.z * hlc.z * hlc.z * hlc.z
+    );
+    
+    float sk = sk_hlmin(lum, 0.58631f, 0.333f);
+    float3 mixed = mix3(color, color * hlc4, sk);
+    color = make_float3(
+        _fminf(color.x, mixed.x),
+        _fminf(color.y, mixed.y),
+        _fminf(color.z, mixed.z)
+    );
+    
+    float rfl = lum - (ssi * _mix(lumP2 * lumP2, maxRGB, ssc.x));
+    
+    // Преобразование в YIQ
+    float3 yiq;
+    yiq.x = rgb2yiq.r0.x * color.x + rgb2yiq.r0.y * color.y + rgb2yiq.r0.z * color.z;
+    yiq.y = rgb2yiq.r1.x * color.x + rgb2yiq.r1.y * color.y + rgb2yiq.r1.z * color.z;
+    yiq.z = rgb2yiq.r2.x * color.x + rgb2yiq.r2.y * color.y + rgb2yiq.r2.z * color.z;
+    
+    yiq.x = _mix(_mix(lum, rfl, ssi), yiq.x, lumP2 * skm * 1.75f);
+    
+    // Преобразование обратно в RGB
+    float3 result;
+    result.x = yiq2rgb.r0.x * yiq.x + yiq2rgb.r0.y * yiq.y + yiq2rgb.r0.z * yiq.z;
+    result.y = yiq2rgb.r1.x * yiq.x + yiq2rgb.r1.y * yiq.y + yiq2rgb.r1.z * yiq.z;
+    result.z = yiq2rgb.r2.x * yiq.x + yiq2rgb.r2.y * yiq.y + yiq2rgb.r2.z * yiq.z;
+    
+    return result;
+}
+
+__DEVICE__ float hlko(float l) {
+    l *= l * l * l * l;
+    return _expf(-25.0f * l) * (1.0f - l);
+}
+
+__DEVICE__ float crmko(float crm) {
+    return 39.06889564611748f * _powf(crm, 1.503301f) * _powf(1.0f - crm, 5.596701f);
+}
+
+__DEVICE__ float3 dns(float3 rgb, float amount, float crm, float lum, float3 lum3) {
+    if (amount <= 0.5f) {
+        return mix3(lum3, rgb, amount * 2.0f); 
+    } else {
+        float d = _powf((amount - 0.5f) / 0.5f, 2.0f); // [0.5:1.0] ◞> [0.0:1.0]
+        d *= hlko(lum) * crmko(crm);
+        d = d * (12.125f - 1.0f) + 1.0f; // [0.0:1.0] -> [1.0:12.125]
+        float mxc = max3(rgb.x, rgb.y, rgb.z);
+        float3 dRGB = mix3(lum3, rgb, _mix(amount * 2.0f, d, amount));
+        dRGB = dRGB * _mix(1.0f, mxc / _fmaxf(max3(dRGB.x, dRGB.y, dRGB.z), 0.00001f), 1.413f - lum);
+        return mix3(rgb, dRGB, rgb.x);
+    }
+}
+
+__DEVICE__ float inv_sst(float x) {
+    float nx = 1.0f - x;
+    return nx * _powf(x, 0.707f) + x * (1.0f - _powf(nx, 0.707f));
+}
+
+__DEVICE__ float3 lch_mod(float3 yiq, float sl, float tl, float r) {
+    float f = r - 2.0f;
+    float sa = (sl - tl) + 1.0f; // [-1 : 0 : 1] -> [0 : 1 : 2]
+    float sf = inv_sst(0.5f * sa); // [0 : 1 : 2] ～> [0 : 0.5 : 1]
+    float st = _fmaxf(0.0f, ((sa * (r + f)) / 2.0f) - f); // [0 : 1 : 2] -> [0.0 : 1.0 : r]
+    
+    float3 result = yiq;
+    result.y = _mix(yiq.y, st * ((yiq.y - 0.5f) + 0.5f), sf);
+    result.z = _mix(yiq.z, st * ((yiq.z - 0.5f) + 0.5f), sf);
+    result.x = _mix(sl, tl, 0.333f);
+    
+    return clamp3(matmul(yiq2rgb, result), 0.0f, 1.0f);
+}
+
+__DEVICE__ float xpf(float x, float m) {
+    float x1 = x + 1.0f;
+    float m1 = m + 1.0f;
+    x = 1.0f / (x1 * x1);
+    m = 1.0f / (m1 * m1);
+    return (x - m) / (1.0f - m);
+}
+
+__DEVICE__ float3 rng_mod(float3 c, float3 b, float3 w) {
+    const float3 ooo = {0.0f, 0.0f, 0.0f};
+    const float3 www = {1.0f, 1.0f, 1.0f};
+    float l = c.x * 0.299f + c.y * 0.587f + c.z * 0.114f;
+    float hlko = l * l * l;
+    float sdko = 0.5f * xpf(l, 0.5f);
+    return mix3_v(mix3(ooo, b, sdko), mix3(www, w, hlko), c);
+}
+
+__DEVICE__ float hue2rgb(float p, float q, float t) {
+    if (t < 0.0f) t += 1.0f;
+    if (t > 1.0f) t -= 1.0f;
+    if (t < 1.0f/6.0f) return p + (q - p) * 6.0f * t;
+    if (t < 1.0f/2.0f) return q;
+    if (t < 2.0f/3.0f) return p + (q - p) * (2.0f/3.0f - t) * 6.0f;
+    return p;
+}
+
+__DEVICE__ float3 hsl2rgb(float h, float s, float l) {
+    if (s <= 0.0f) {
+        return make_float3(l, l, l); // achromatic
+    }
+    
+    float q = l < 0.5f ? l * (1.0f + s) : l + s - l * s;
+    float p = 2.0f * l - q;
+    
+    float r = hue2rgb(p, q, h + 1.0f/3.0f);
+    float g = hue2rgb(p, q, h);
+    float b = hue2rgb(p, q, h - 1.0f/3.0f);
+    
+    return make_float3(r, g, b);
+}
+
+// Main transform function, analog to main() in GLSL
+__DEVICE__ float3 transform(int p_Width, int p_Height, int p_X, int p_Y, float p_R, float p_G, float p_B) {
+
+    float px = (float)p_X/(float)p_Width;
+    float py = (float)p_Y/(float)p_Height;
+    float crv;
+
+    if (separator_hvs > 0.5) {
+        crv = getSplineValue(px, hvsSpline1, hvsSpline2, hvsSpline3, hvsSpline4, hvsSpline5, hvsSpline6);
+        return _fabs(1.0 - py - crv)<0.01f ? make_float3(px*0.5f,(1.0f-px)*0.5f,0.5f) : make_float3(0.0f,0.0f,0.0f);
+    }
+    if (separator_svs > 0.5) {
+        crv = getSplineValue(px, svsSpline1, svsSpline2, svsSpline3, svsSpline4, svsSpline5, svsSpline6);
+        return _fabs(1.0 - py - crv)<0.01f ? make_float3(0.5f,0.5f-px*0.5f,0.5f-px*0.5f) : make_float3(0.0f,0.0f,0.0f);
+    }
+    if (separator_lvs > 0.5) {
+        crv = getSplineValue(px, lvsSpline1, lvsSpline2, lvsSpline3, lvsSpline4, lvsSpline5, lvsSpline6);
+        return _fabs(1.0 - py - crv)<0.01f ? make_float3(0.0f,0.3f+0.4f*px,0.0f) : make_float3(0.0f,0.0f,0.0f);
+    }
+    if (separator_lvl > 0.5) {
+        crv = getSplineValue(px, lvlSpline1, lvlSpline2, lvlSpline3, lvlSpline4, lvlSpline5, lvlSpline6);
+        return _fabs(1.0 - py - crv)<0.01f ? make_float3(0.3f+0.4f*px,0.3f+0.4f*px,0.3f+0.4f*px) : make_float3(0.0f,0.0f,0.0f);
+    }
+    if (separator_hvl > 0.5) {
+        crv = getSplineValue(px, hvlSpline1, hvlSpline2, hvlSpline3, hvlSpline4, hvlSpline5, hvlSpline6);
+        return _fabs(1.0 - py - crv)<0.01f ? make_float3(0.5f,(1.0f-px)*0.5f,px*0.5f) : make_float3(0.0f,0.0f,0.0f);
+    }
+
+    if (separator_map_s > 0.5) {
+        float sprMask = rf_s2m(max(p_R, max(p_G, p_B)), separation/100.0f);
+        return make_float3(sprMask,sprMask,sprMask);
+    }
+
+    // Initialize variables
+    float3 srcColor = {p_R, p_G, p_B};
+    float3 fragColor = srcColor;
+    float3 baseColor = fragColor;
+
+    /* --- IMG --- */
+    float mxc = max3(fragColor.x, fragColor.y, fragColor.z);
+    fragColor = fragColor * iExposure;
+    fragColor = mix3(fragColor, baseColor, mxc);
+    fragColor.x = _fmaxf(0.42575f + iContrast * (fragColor.x - 0.42575f), 0.0f);
+    fragColor.y = _fmaxf(0.42575f + iContrast * (fragColor.y - 0.42575f), 0.0f);
+    fragColor.z = _fmaxf(0.42575f + iContrast * (fragColor.z - 0.42575f), 0.0f);
+    fragColor = mix3(fragColor, baseColor, mxc);
+
+    // Temperature
+    float3 tempMix = mix3_v(
+        2.0f * fragColor * D667,
+        make_float3(
+            1.0f - 2.0f * (1.0f - fragColor.x) * D667inv.x,
+            1.0f - 2.0f * (1.0f - fragColor.y) * D667inv.y,
+            1.0f - 2.0f * (1.0f - fragColor.z) * D667inv.z
+        ),
+        make_float3(
+            fragColor.x > 0.5f ? 1.0f : 0.0f,
+            fragColor.y > 0.5f ? 1.0f : 0.0f,
+            fragColor.z > 0.5f ? 1.0f : 0.0f
+        )
+    );
+    fragColor = mix3(fragColor, tempMix, iTemperature);
+
+    mxc = max3(fragColor.x, fragColor.y, fragColor.z);
+    float amxc = _fabs(mxc);
+
+    // Saturation
+    float3 satAdjust = mxc == 0.0f ? make_float3(0.0f, 0.0f, 0.0f) : make_float3(
+        mxc - ((mxc - fragColor.x) / amxc) * iSaturation * amxc,
+        mxc - ((mxc - fragColor.y) / amxc) * iSaturation * amxc,
+        mxc - ((mxc - fragColor.z) / amxc) * iSaturation * amxc
+    );
+    fragColor = mix3(satAdjust, fragColor, mxc);
+
+    baseColor = fragColor;
+
+    /* --- SCN --- */
+    float lum = rgb2luma(fragColor);
+    mxc = max3(fragColor.x, fragColor.y, fragColor.z);
+
+    float volumeX = 2.0f * colorVolume_x;
+    float volumeY = colorVolume_y < 0.5f ? _powf(2.0f, colorVolume_y - 0.5f) : 0.2f * (colorVolume_y - 0.5f) * 2.0f;
+
+    // Density (dns)
+    float3 lumVec = {lum, lum, lum};
+    fragColor = mix3(lumVec, fragColor, volumeX);
+    if (volumeX > 1.0f) {
+        float maxCol = _fmaxf(max3(fragColor.x, fragColor.y, fragColor.z), 0.00001f);
+        float exposureFactor = 1.0f + (mxc / maxCol - 1.0f) * (1.413f - lum);
+        fragColor = fragColor * exposureFactor;
+    }
+
+    // Exposure (exp)
+    if (volumeY > 0.5f) {
+        fragColor = mix3(fragColor, fragColor * volumeY, lum);
+    } else {
+        fragColor = fragColor + volumeY * _powf(1.0f - lum, 5.0f);
+    }
+
+    // Create mapVec's from parameters
+    float4 mapVec0 = make_float4(mapVec0_x, mapVec0_y/100.0f, mapVec0_z, mapVec0_w/100.0f);
+    float4 mapVec1 = make_float4(mapVec1_x, mapVec1_y/100.0f, mapVec1_z, mapVec1_w/100.0f);
+    float4 mapVec2 = make_float4(mapVec2_x, mapVec2_y/100.0f, mapVec2_z, mapVec2_w/100.0f);
+    float4 mapVec3 = make_float4(mapVec3_x, mapVec3_y/100.0f, mapVec3_z, mapVec3_w/100.0f);
+    float4 mapVec4 = make_float4(mapVec4_x, mapVec4_y/100.0f, mapVec4_z, mapVec4_w/100.0f);
+    float4 mapVec5 = make_float4(mapVec5_x, mapVec5_y/100.0f, mapVec5_z, mapVec5_w/100.0f);
+
+    // Apply refrakt with full mapVec set
+    fragColor = refrakt(fragColor, mapVec0, mapVec1, mapVec2, mapVec3, mapVec4, mapVec5, lum, separation/100.0f);
+
+    float balanceX = (2.0f * colorBalance_x - 1.0f) / 10.0f;
+    float balanceY = 0.5f * (2.0f * colorBalance_y - 1.0f) * 0.5226f * 0.1f;
+
+    // Yellow-blue color balance (tnt ylw-blu)
+    float3 yellowBlue = mix3_v(
+        2.0f * fragColor * D667,
+        make_float3(
+            1.0f - 2.0f * (1.0f - fragColor.x) * D667inv.x,
+            1.0f - 2.0f * (1.0f - fragColor.y) * D667inv.y,
+            1.0f - 2.0f * (1.0f - fragColor.z) * D667inv.z
+        ),
+        make_float3(
+            fragColor.x > 0.5f ? 1.0f : 0.0f,
+            fragColor.y > 0.5f ? 1.0f : 0.0f,
+            fragColor.z > 0.5f ? 1.0f : 0.0f
+        )
+    );
+    fragColor = mix3(fragColor, yellowBlue, balanceX);
+
+    // Magenta-green color balance (tnt mag-grn)
+    float3 yiq = matmul(rgb2yiq, fragColor);
+    yiq.z = _clampf(balanceY + yiq.z, -0.5226f, 0.5226f);
+    fragColor = matmul(yiq2rgb, yiq);
+
+    // Shadows and highlights
+    // Create shadows and highlights from parameters
+    float4 shadows = calculateValues(shadowsAngle, shadowsDistance, 0.0);
+    float4 highlights = calculateValues(highlightsAngle, highlightsDistance, 1.0);
+
+    float hue = rgb2hue(fragColor);
+    float maxRGB = max3(fragColor.x, fragColor.y, fragColor.z);
+    fragColor = skatter(fragColor, shadows, highlights, hue, maxRGB, lum);
+
+    
+    // Final mixing
+    fragColor = clamp3(mix3(baseColor, fragColor, spectralMix), 0.0f, 42.0f);
+
+    // DNS using splines
+    float crm = chroma2log(rgb2chroma(fragColor));
+    lum = _sqrtf(fragColor.x * fragColor.x * 0.299f + fragColor.y * fragColor.y * 0.587f + fragColor.z * fragColor.z * 0.114f);
+    float3 lum3 = {lum, lum, lum};
+    
+    float hvsValue = getSplineValue(hue, hvsSpline1, hvsSpline2, hvsSpline3, hvsSpline4, hvsSpline5, hvsSpline6);
+    float3 dnsColor = dns(fragColor, hvsValue, crm, lum, lum3);
+
+    float svsValue = getSplineValue(crm, svsSpline1, svsSpline2, svsSpline3, svsSpline4, svsSpline5, svsSpline6);
+    dnsColor = dns(dnsColor, svsValue, crm, lum, lum3);
+
+    float lvsValue = getSplineValue(lum, lvsSpline1, lvsSpline2, lvsSpline3, lvsSpline4, lvsSpline5, lvsSpline6);
+    dnsColor = mix3(lum3, dnsColor, lvsValue * 2.0f);
+
+    fragColor = mix3(fragColor, dnsColor, densityMix);
+    
+    // Apply brightness modification
+    float3 srcYIQ = matmul(rgb2yiq, fragColor);
+    crm = yiq2chroma(srcYIQ);
+    lum = srcYIQ.x;
+    
+    float tgtLUM = getSplineValue(lum, lvlSpline1, lvlSpline2, lvlSpline3, lvlSpline4, lvlSpline5, lvlSpline6);
+    float3 lumColor = lch_mod(srcYIQ, lum, tgtLUM, 2.4381791201f);
+    
+    float hvlValue = getSplineValue(hue, hvlSpline1, hvlSpline2, hvlSpline3, hvlSpline4, hvlSpline5, hvlSpline6);
+    float hueVsLum = ((hvlValue + 0.5f) - 0.5f) * 4.0f - 1.0f;
+    float hvlInf = (1.0f - _powf(1.0f - crm, 2.0f)) * (1.0f - rgb2luma(lumColor));
+    lumColor = mix3(lumColor, lumColor * hueVsLum, hvlInf);
+    
+    float3 blackPointVec = {blackPoint_r, blackPoint_g, blackPoint_b};
+    float3 whitePointVec = {whitePoint_r, whitePoint_g, whitePoint_b};
+    lumColor = rng_mod(lumColor, blackPointVec, whitePointVec);
+    fragColor = clamp3(mix3(fragColor, lumColor, lumaMix), 0.0f, 1.0f);
+    
+    return fragColor;
+} 
