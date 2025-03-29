@@ -540,6 +540,7 @@ function initWebGL() {
         const lutData = generateLUT(lutSize);
         exportLUTAsCube(lutData, lutSize);
     });    
+
 }
 
 function compileShader(type, source) {
@@ -581,7 +582,7 @@ export function resizeCanvasToDisplaySize(canvas) {
 }
 
 // Инициализируем кнопку загрузки
-uploadButton = new UploadButton('uploadBtn', async (file, fileHandle) => {
+uploadButton = new UploadButton('uploadBtn', async (file, fileInfo) => {
     if (!file || file.type.startsWith('image/')) {
         // Останавливаем видео если оно воспроизводится
         if (videoElement && !videoElement.paused) {
@@ -625,10 +626,6 @@ uploadButton = new UploadButton('uploadBtn', async (file, fileHandle) => {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
 
     } else if (file.type.startsWith('video/')) {
-        // Если это видео
-        // Сохраняем ссылки на директорию и файл
-        videoHandle = fileHandle;
-
         // Создаем элемент video если его еще нет
         if (!videoElement) {
             videoElement = document.createElement('video');
@@ -677,6 +674,10 @@ uploadButton = new UploadButton('uploadBtn', async (file, fileHandle) => {
     }
     updateVideoControlsVisibility();
 });
+
+const changeDirButton = document.getElementById('changeDirBtn');
+changeDirButton.addEventListener('click', async () => await uploadButton.forceChangeDirectory());
+    
 
 // Обработчик для кнопки Play/Pause
 videoControls.playPauseBtn.onclick = () => {
@@ -892,7 +893,7 @@ async function getInterfaceState() {
             input: document.getElementById('inputSpace').value,
             output: document.getElementById('outputSpace').value
         },
-        fileHandle: uploadButton.getValue()
+        fileInfo: uploadButton.getValue()
     };
     return state;
 }
@@ -939,7 +940,7 @@ async function setInterfaceState(state) {
     document.getElementById('outputSpace').value = state?.colorSpaces?.output || 'sRGB';
     await updateColorSpaces();
 
-    await uploadButton.setValue(state.fileHandle);
+    await uploadButton.setValue(state.fileInfo);
 
     renderPaused = false;
  

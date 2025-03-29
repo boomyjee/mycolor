@@ -134,6 +134,27 @@ body {
     background-color: #45a049;
 }
 
+/* Добавим стили для кнопок загрузки/смены папки */
+.control-group .button-row {
+    display: flex; /* Ставим кнопки в ряд */
+    align-items: center; /* Выравниваем по центру вертикально */
+    gap: 10px; /* Добавляем отступ между кнопками */
+}
+
+.control-group .button-row .control {
+    flex-grow: 1; /* Основная кнопка занимает больше места */
+    margin-bottom: 0; /* Убираем нижний отступ у кнопок в ряду */
+}
+
+.control-group .button-row .icon-btn {
+    flex-grow: 0; /* Кнопка-иконка не растягивается */
+    width: 40px; /* Фиксированная ширина для кнопки-иконки */
+    min-width: 40px;
+    padding: 8px; /* Уменьшаем паддинг для иконки */
+    font-size: 18px; /* Размер иконки */
+    line-height: 1; /* Убираем лишнюю высоту строки */
+}
+
 #imageInput {
     display: none;
 }
@@ -631,4 +652,177 @@ body {
 
 .context-menu-item .menu-icon {
     margin-right: 8px;
+}
+
+/* Styles for Directory File Picker */
+
+.dfp-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Темный фон оверлея */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+    color: #ccc; /* Светлый текст по умолчанию */
+}
+.dfp-overlay.visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
+}
+.dfp-modal {
+    background-color: #2a2a2a; /* Темный фон модального окна */
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Тень для темного фона */
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #444; /* Темная граница */
+}
+
+/* Стили для кнопки Наверх (если она используется с этим классом) */
+.dfp-up-btn {
+    display: inline-block;
+    align-items: center;
+    padding: 2px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: #3a3a3a; /* Фон кнопки 'Наверх' */
+    color: #ccc;
+    transition: background-color 0.2s ease;
+    box-sizing: border-box; /* Добавляем box-sizing */
+}
+
+.dfp-up-btn:hover {
+    background-color: #4a4a4a;
+}
+
+.dfp-up-btn .file-icon {
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+    color: #888;
+}
+
+.dfp-up-btn .file-name {
+    flex-grow: 1;
+}
+/* --- Конец стилей для кнопки Наверх --- */
+
+.dfp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Устанавливаем margin в 0 */
+    overflow-y: auto;
+    flex-grow: 1;
+    border: 1px solid #444; /* Темная граница списка */
+    border-radius: 4px;
+    background-color: #333; /* Темный фон списка */
+}
+
+.dfp-list li {
+    padding: 8px 15px;
+    cursor: pointer;
+    /* border-bottom: 1px solid #444; */ /* УБРАН разделитель */
+    transition: background-color 0.2s ease;
+    color: #ccc; /* Светлый текст элемента */
+    display: flex; /* Общие стили из Thumbnail перенесены сюда */
+    align-items: center;
+    gap: 10px;
+}
+
+/* .dfp-list li:last-child { */
+    /* border-bottom: none; */ /* Правило больше не нужно */
+/* } */
+
+.dfp-list li:hover {
+    background-color: #444; /* Фон при наведении */
+}
+
+ .dfp-list li.selected {
+    background-color: #555; /* Фон выбранного элемента */
+    color: #fff; /* Белый текст выбранного */
+    font-weight: bold;
+}
+
+.dfp-list li.loading,
+.dfp-list li.empty,
+.dfp-list li.error {
+    text-align: center;
+    padding: 20px;
+    color: #888; /* Цвет служебных сообщений */
+    cursor: default;
+    background-color: #333; /* Фон совпадает со списком */
+}
+
+ .dfp-list li.error {
+     color: #f88; /* Светло-красный для ошибки */
+ }
+
+/* --- УДАЛЕНЫ стили для .dfp-close-btn --- */
+/* .dfp-close-btn { */
+/*    background-color: #555; */
+/*    color: white; */
+/*    border: none; */
+/*    padding: 10px 20px; */
+/*    border-radius: 5px; */
+/*    cursor: pointer; */
+/*    align-self: center; */
+/*    transition: background-color 0.2s ease; */
+/*    margin-top: 10px; */
+/*    display: none; */
+/* } */
+
+/* .dfp-close-btn:hover { */
+/*    background-color: #666; */
+/* } */
+/* --- Конец удаления --- */
+
+/* Thumbnail Styles */
+
+.dfp-list li .thumbnail-container {
+    flex-shrink: 0;
+    width: 40px;
+    height: 30px;
+    background-color: #4a4a4a; /* Фон заглушки */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.dfp-list li img.thumbnail {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dfp-list li .file-icon {
+    font-size: 20px;
+    width: 40px;
+    text-align: center;
+    flex-shrink: 0;
+    color: #888; /* Цвет иконки */
+}
+
+.dfp-list li .file-name {
+    flex-grow: 1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }

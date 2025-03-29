@@ -54,9 +54,22 @@ export class FileStorage {
         });
     }
 
-    async verifyPermission(fileHandle) {
+    async deleteHandle(key) {
+        await this.init();
+
+        return new Promise((resolve, reject) => {
+            const transaction = this.db.transaction(this.storeName, 'readwrite');
+            const store = transaction.objectStore(this.storeName);
+            const request = store.delete(key);
+
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => resolve();
+        });
+    }
+
+    async verifyPermission(fileHandle, mode = 'read') {
         const options = {
-            mode: 'read'
+            mode: mode
         };
         
         // Проверяем разрешение
