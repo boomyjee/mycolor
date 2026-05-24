@@ -88,3 +88,18 @@ assets/luts/            — 64³ 3D LUT data (JSON)
 ```
 
 No build step, no dependencies. Pure HTML/JS/GLSL, ~5800 lines total.
+
+## Graded with MyColor
+
+Frames from a feature film, graded entirely in MyColor and exported as 3D LUT for DaVinci Resolve.
+
+![](docs/mc_002.jpg)
+![](docs/mc_004.jpg)
+![](docs/mc_006.jpg)
+![](docs/mc_009.jpg)
+![](docs/mc_011.jpg)
+![](docs/mc_012.jpg)
+![](docs/mc_015.jpg)
+![](docs/mc_027.jpg)
+![](docs/mc_033.jpg)
+![](docs/mc_035.jpg)
